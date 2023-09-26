@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Menu\MenuGroupController;
 use App\Http\Controllers\Menu\MenuItemController;
+use App\Http\Controllers\PekerjaController;
 use App\Http\Controllers\RoleAndPermission\AssignPermissionController;
 use App\Http\Controllers\RoleAndPermission\AssignUserToRoleController;
 use App\Http\Controllers\RoleAndPermission\ExportPermissionController;
@@ -11,6 +13,7 @@ use App\Http\Controllers\RoleAndPermission\ImportPermissionController;
 use App\Http\Controllers\RoleAndPermission\ImportRoleController;
 use App\Http\Controllers\RoleAndPermission\PermissionController;
 use App\Http\Controllers\RoleAndPermission\RoleController;
+use App\Http\Controllers\RolePekerjaController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\UserController;
@@ -32,11 +35,9 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/dashboard', function () {
-        return view('home', ['users' => User::get(),]);
-    });
-    //user list
+    Route::resource('dashboard', ProjectController::class);
 
+    //user list
     Route::prefix('user-management')->group(function () {
         Route::resource('user', UserController::class);
         Route::post('import', [UserController::class, 'import'])->name('user.import');
@@ -72,5 +73,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('assign-user', [AssignUserToRoleController::class, 'store'])->name('assign.user.store');
         Route::get('assing-user/{user}/edit', [AssignUserToRoleController::class, 'edit'])->name('assign.user.edit');
         Route::put('assign-user/{user}', [AssignUserToRoleController::class, 'update'])->name('assign.user.update');
+    });
+
+    Route::prefix('pekerja-management')->group(function () {
+        Route::resource('role-pekerja', RolePekerjaController::class);
+        Route::resource('pekerja', PekerjaController::class);
     });
 });

@@ -2,30 +2,56 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Table</h1>
+            <h1>List Project</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Components</a></div>
-                <div class="breadcrumb-item">Table</div>
+                <a href="{{ route('dashboard.create') }}" class="btn btn-primary">Tambah</a>
+
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Title</h4>
-                    </div>
-                    <div class="card-body"></div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header"></div>
-                    <div class="card-body"></div>
-                </div>
-            </div>
-        </div> 
         <div class="section-body">
+            <div class="row">
+                @foreach ($project as $listProject)
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <article class="article article-style-c">
+                            <div class="article-header">
+                                <div class="article-image"
+                                    style="background-image: url('{{ Storage::url($listProject->foto) }}')">
+                                </div>
+
+
+                            </div>
+                            <div class="article-details">
+                                @if ($listProject->status == 'Selesai')
+                                    <span class="badge badge-success">Selesai</span>
+                                @else
+                                    <span class="badge badge-warning">Belum Selesai</span>
+                                @endif
+                                <div class="article-title">
+                                    <h2><a href="#">{{ $listProject->name }}</a></h2>
+                                </div>
+                                <p>Lokasi : {{ $listProject->lokasi }}</p>
+                                <div class="flex">
+                                    <div class="article-user d-flex justify-content-between align-items-center">
+                                        <div class="container">
+                                            <div class="row">
+                                                <img alt="image" src="../assets/img/avatar/avatar-1.png">
+                                                <div class="article-user-details">
+                                                    <div class="user-detail-name">
+                                                        <a href="#">{{ $listProject->pekerja_name }}</a>
+                                                    </div>
+                                                    <div class="text-job">{{ $listProject->role_pekerja_name }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#" class="btn btn-primary">Cek</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                @endforeach
+            </div>
+
 
         </div>
     </section>

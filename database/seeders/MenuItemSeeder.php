@@ -66,6 +66,18 @@ class MenuItemSeeder extends Seeder
                     'permission_name' => 'menu-item.index',
                     'menu_group_id' => 4,
                 ],
+                [
+                    'name' => 'Role Pekerja',
+                    'route' => 'pekerja-management/role-pekerja',
+                    'permission_name' => 'role-pekerja.index',
+                    'menu_group_id' => 5,
+                ],
+                [
+                    'name' => 'Pekerja',
+                    'route' => 'pekerja-management/pekerja',
+                    'permission_name' => 'pekerja.index',
+                    'menu_group_id' => 5,
+                ],
             ]
         );
     }
