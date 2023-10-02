@@ -4,7 +4,7 @@
         <div class="section-header">
             <h1>List Project</h1>
             <div class="section-header-breadcrumb">
-                <a href="{{ route('dashboard.create') }}" class="btn btn-primary">Tambah</a>
+                <a href="{{ route('project.create') }}" class="btn btn-primary">Tambah</a>
 
             </div>
         </div>
@@ -14,9 +14,14 @@
                     <div class="col-12 col-md-4 col-lg-4">
                         <article class="article article-style-c">
                             <div class="article-header">
-                                <div class="article-image"
-                                    style="background-image: url('{{ Storage::url($listProject->foto) }}')">
-                                </div>
+                                @if ($listProject->foto == null)
+                                    <div class="article-image" data-background="../assets/img/example-image.jpg">
+                                    </div>
+                                @else
+                                    <div class="article-image"
+                                        style="background-image: url('{{ Storage::url($listProject->foto) }}')">
+                                    </div>
+                                @endif
 
 
                             </div>
@@ -43,7 +48,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="#" class="btn btn-primary">Cek</a>
+                                        <a href="{{ route('project.show', $listProject->id) }}"
+                                            class="btn btn-primary">Cek</a>
                                     </div>
                                 </div>
                             </div>

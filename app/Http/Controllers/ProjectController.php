@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Pekerja;
 use App\Models\Project;
+use App\Models\Saldo;
 use App\Models\User;
 
 class ProjectController extends Controller
@@ -89,7 +90,12 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        $saldo = Saldo::where('project_id', $project->id)->first();
+        $project = Project::where('id', $project->id)->first();
+        return view('project.show')->with([
+            'saldo' => $saldo,
+            'project' => $project,
+        ]);
     }
 
     /**

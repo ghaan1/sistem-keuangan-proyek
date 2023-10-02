@@ -23,7 +23,9 @@ class DatabaseSeeder extends Seeder
             MenuItemSeeder::class,
             CategorySeeder::class,
             RolePekerjaSeeder::class,
-            PekerjaSeeder::class
+            PekerjaSeeder::class,
+            ProjectSeeder::class,
+            SaldoSeeder::class
         ]);
     }
 }

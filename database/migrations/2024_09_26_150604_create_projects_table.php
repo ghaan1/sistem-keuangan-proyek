@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('total_pekerja');
             $table->unsignedBigInteger('nama_mandor');
             $table->double('nilai_project');
-            $table->string('foto');
+            $table->string('foto')->nullable();
             $table->enum('status', ['Belum Selesai', 'Selesai']);
             $table->timestamps();
             $table->foreign('nama_mandor')->references('id')->on('pekerja')->restrictOnDelete();

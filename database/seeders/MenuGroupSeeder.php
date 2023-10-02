@@ -43,6 +43,11 @@ class MenuGroupSeeder extends Seeder
                     'icon' => 'fas fa-bars',
                     'permisison_name' => 'pekerja.management',
                 ],
+                [
+                    'name' => 'Barang Management',
+                    'icon' => 'fas fa-bars',
+                    'permisison_name' => 'barang.management',
+                ],
             ]
         );
     }

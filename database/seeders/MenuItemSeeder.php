@@ -78,6 +78,12 @@ class MenuItemSeeder extends Seeder
                     'permission_name' => 'pekerja.index',
                     'menu_group_id' => 5,
                 ],
+                [
+                    'name' => 'Barang',
+                    'route' => 'barang-management/barang',
+                    'permission_name' => 'barang.index',
+                    'menu_group_id' => 6,
+                ],
             ]
         );
     }

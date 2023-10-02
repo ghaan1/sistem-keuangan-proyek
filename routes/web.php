@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Menu\MenuGroupController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\RoleAndPermission\ImportRoleController;
 use App\Http\Controllers\RoleAndPermission\PermissionController;
 use App\Http\Controllers\RoleAndPermission\RoleController;
 use App\Http\Controllers\RolePekerjaController;
+use App\Http\Controllers\SaldoController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\UserController;
@@ -35,7 +37,8 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::resource('dashboard', ProjectController::class);
+    Route::resource('project', ProjectController::class);
+    Route::resource('saldo', SaldoController::class);
 
     //user list
     Route::prefix('user-management')->group(function () {
@@ -78,5 +81,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::prefix('pekerja-management')->group(function () {
         Route::resource('role-pekerja', RolePekerjaController::class);
         Route::resource('pekerja', PekerjaController::class);
+    });
+
+    Route::prefix('barang-management')->group(function () {
+        Route::resource('barang', BarangController::class);
+        Route::post('import', [BarangController::class, 'import'])->name('barang.import');
     });
 });
