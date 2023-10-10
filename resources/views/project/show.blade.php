@@ -63,12 +63,12 @@
                                 data-target="#addSaldoModal">
                                 <i class="far fa-file"></i> Tambah Saldo
                             </a>
-
                             <a href="#" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i>
                                 Lunasi Hutang</a>
-                            <a href="#" class="btn btn-icon icon-left btn-primary"><i class="fas fa-dollar-sign"></i>
-                                Histori Saldo</a>
-
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#historyModal"
+                                data-id="{{ $saldo->id }}">
+                                Lihat Histori Saldo
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -116,9 +116,38 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="historyModalLabel">Histori Saldo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table id="historyTable" class="table table-bordered table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>No</th> <!-- Kolom untuk nomor urut -->
+                                <th>Tipe Saldo</th>
+                                <th>Jumlah</th>
+                                <th>Keterangan</th>
+                                <th>Tanggal</th>
+                            </tr>
+                        </thead>
+
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('customScript')
     <script src="/assets/js/select2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#addSaldoForm').submit(function(e) {
@@ -151,8 +180,55 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            let historyTable;
+
+            $('#historyModal').on('show.bs.modal', function(event) {
+                const button = $(event.relatedTarget);
+                const id = button.data('id');
+
+                if (!historyTable) {
+                    historyTable = $('#historyTable').DataTable({
+                        ajax: {
+                            url: `/saldo/history/${id}`,
+                            dataSrc: ''
+                        },
+                        order: [
+                            [0, 'asc']
+                        ],
+                        columns: [{
+                                data: null,
+                                searchable: false,
+                                orderable: false,
+                                render: function(data, type, row, meta) {
+
+                                    return meta.row + 1;
+                                }
+                            },
+                            {
+                                data: 'saldo_type'
+                            },
+                            {
+                                data: 'amount'
+                            },
+                            {
+                                data: 'keterangan'
+                            },
+                            {
+                                data: 'created_at'
+                            }
+                        ]
+                    });
+                } else {
+                    historyTable.ajax.url(`/saldo/history/${id}`).load();
+                }
+            });
+        });
+    </script>
 @endpush
 
 @push('customStyle')
     <link rel="stylesheet" href="/assets/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css" />
 @endpush

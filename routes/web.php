@@ -38,6 +38,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('project', ProjectController::class);
+    Route::get('/saldo/history/{id}', [SaldoController::class, 'getHistory']);
     Route::resource('saldo', SaldoController::class);
 
     //user list
