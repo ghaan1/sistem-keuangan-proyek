@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('project_id');
             $table->double('saldo_project')->nullable();
             $table->double('piutang_pengusaha')->nullable();
-            $table->string('keterangan')->nullable();
             $table->json('history');
             $table->timestamps();
             $table->foreign('project_id')->references('id')->on('project')->restrictOnDelete();

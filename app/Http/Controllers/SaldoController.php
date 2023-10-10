@@ -56,7 +56,7 @@ class SaldoController extends Controller
             'id' => $this->generateNextHistoryId($saldo),
             'saldo_type' => $saldo_type,
             'amount' => $amount,
-            'amount' => $keterangan,
+            'keterangan' => $keterangan,
             'created_at' => Carbon::now($timezone)->format('Y-m-d H:i:s')
         ];
 
@@ -89,7 +89,8 @@ class SaldoController extends Controller
     public function getHistory($id)
     {
         $saldo = Saldo::find($id);
-        return response()->json($saldo->history);
+        $history = json_decode($saldo->history, true) ?: [];
+        return response()->json($history);
     }
 
 

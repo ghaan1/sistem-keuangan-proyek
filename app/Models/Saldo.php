@@ -15,7 +15,4 @@ class Saldo extends Model
         'piutang_pengusaha',
         'history'
     ];
-    protected $casts = [
-        'history' => 'array',
-    ];
 }
