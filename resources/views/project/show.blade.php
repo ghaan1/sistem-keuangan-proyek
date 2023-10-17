@@ -77,6 +77,115 @@
         <div class="section-body">
         </div>
     </section>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                
+                <div class="card">
+                    <div class="card-header">
+                      <h4>Basic DataTables</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <div id="table-1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="table-1_length">
+                                        <label>Show 
+                                            <select name="table-1_length" aria-controls="table-1" class="form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> entries
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="table-1_filter" class="dataTables_filter">
+                                        <label>Search:
+                                            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="table-1">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-striped dataTable no-footer" id="outcomeTable" role="grid" aria-describedby="outcomeTable-info">
+                                        <thead>                                 
+                                            <tr role="row">
+                                                <th>ID</th>
+                                                <th>Jenis Pengeluaran</th>
+                                                <th>Total Pengeluaran</th>
+                                                <th>Tanggal</th>
+                                                <th>Pilihan Saldo</th>
+                                                <th>ID Barang</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>                                 
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">4</td>
+                                                <td class="">Input data</td>
+                                                <td class="">Rp 500.000.000</td>
+                                                <td>2018-01-16</td>
+                                                <td>enum</td>
+                                                <td>222</td>
+                                            </tr>
+                                            <tr role="row" class="even">
+                                                <td class="sorting_1">3</td>
+                                                <td class="">pdata</td>
+                                                <td class="">Rp 400.000.000</td>
+                                                <td>2018-01-16</td>
+                                                <td>enum</td>
+                                                <td>222</td>
+                                            </tr>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">2</td>
+                                                <td class="">hdhdhd</td>
+                                                <td class="">Rp 300.000.000</td>
+                                                <td>2018-01-16</td>
+                                                <td>enum</td>
+                                                <td>222</td>
+                                            </tr>
+                                            <tr role="row" class="even">
+                                                <td class="sorting_1">1</td>
+                                                <td class="">butp</td>
+                                                <td class="">Rp 200.000.000</td>
+                                                <td>2018-01-16</td>
+                                                <td>enum</td>
+                                                <td>222</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="dataTables_info" id="table-1_info" role="status" aria-live="polite">Showing 1 to 4 of 4 entries</div>
+                                </div>
+                                <div class="col-sm-12 col-md-7">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="table-1_paginate">
+                                        <ul class="pagination">
+                                            <li class="paginate_button page-item previous disabled" id="table-1_previous">
+                                                <a href="#" aria-controls="table-1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                            </li>
+                                            <li class="paginate_button page-item active">
+                                                <a href="#" aria-controls="table-1" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                                            </li>
+                                            <li class="paginate_button page-item next disabled" id="table-1_next">
+                                                <a href="#" aria-controls="table-1" data-dt-idx="2" tabindex="0" class="page-link">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>    
+            </div>
+        </div>
+    </section>
 
     <div class="modal fade" id="addSaldoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -223,6 +332,11 @@
                     historyTable.ajax.url(`/saldo/history/${id}`).load();
                 }
             });
+        });
+    </script>
+    <script>
+        $(document).ready( function () {
+            $('#outcomeTable').DataTable();
         });
     </script>
 @endpush
